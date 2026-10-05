@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Question Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,500;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <h1>Turn study notes into exam questions</h1>
+  <p>Paste a textbook passage or lecture notes. A FLAN-T5 model writes the questions and answers.</p>
+</header>
+
+<main class="layout">
+  <section class="paper" aria-labelledby="in-h">
+    <h2 id="in-h" class="sr">Your notes</h2>
+    <textarea id="text" spellcheck="true" placeholder="Paste at least 15 words of study material here..."></textarea>
+    <div class="controls">
+      <fieldset class="seg">
+        <legend class="sr">Number of questions</legend>
+        <label><input type="radio" name="n" value="3"><span>3</span></label>
+        <label><input type="radio" name="n" value="5" checked><span>5</span></label>
+        <label><input type="radio" name="n" value="10"><span>10</span></label>
+        <span class="seg-label">questions</span>
+      </fieldset>
+      <label class="sel">Type
+        <select id="qtype"><option value="short">Short answer</option><option value="mcq">Multiple choice</option><option value="tf">True or false</option></select>
+      </label>
+      <label class="sel">Difficulty
+        <select id="difficulty"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select>
+      </label>
+    </div>
+    <div class="controls row2">
+      <label class="ghost filebtn">Upload .txt or .pdf<input id="file" type="file" accept=".txt,.pdf" hidden></label>
+      <button id="example" class="ghost" type="button">Use example text</button>
+      <button id="go" class="primary" type="button">Generate questions</button>
+    </div>
+    <p id="count" class="hint">0 words</p>
+  </section>
+
+  <section class="out" aria-labelledby="out-h" aria-live="polite">
+    <div class="out-head">
+      <h2 id="out-h">Questions</h2>
+      <div id="actions" class="actions" hidden>
+        <label class="toggle"><input id="showAns" type="checkbox"> Show answers</label>
+        <button id="copy" class="ghost" type="button">Copy</button>
+        <button id="txt" class="ghost" type="button">.txt</button>
+        <button id="pdf" class="ghost" type="button">.pdf</button>
+      </div>
+    </div>
+    <p id="empty" class="empty">Your questions will appear here. Paste some notes and select Generate questions.</p>
+    <p id="status" class="status" hidden></p>
+    <p id="error" class="error" role="alert" hidden></p>
+    <ol id="list" class="qlist"></ol>
+  </section>
+</main>
+<script src="/static/script.js"></script>
+</body>
+</html>

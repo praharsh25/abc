@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+python-multipart
+transformers
+torch
+sentencepiece
+nltk
+reportlab
+pypdf
